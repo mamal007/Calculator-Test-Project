@@ -1,8 +1,26 @@
 {
-  "name": "calculatorTurpal",
+  "name": "calculatorturpal",
   "version": "1.0.0",
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.2"
-  }
+  },
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamal007/calculator-test-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamal007/calculator-test-project/issues"
+  },
+  "homepage": "https://github.com/mamal007/calculator-test-project#readme",
+  "description": ""
 }
