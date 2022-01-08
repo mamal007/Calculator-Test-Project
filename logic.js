@@ -100,7 +100,6 @@ function calculate() {
     let rawResult = input.textContent;
     let result = 0;
 
-    input.textContent = input.textContent.replaceAll(" ", "");
     while (
         /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent) ||
         /(\d+(\.\d+)?)\-(\d+(\.\d+)?)/.test(input.textContent) ||
@@ -139,7 +138,7 @@ function calculate() {
                 parseFloat(result[1]) + parseFloat(result[3])
             );
         }
-        if (/(\d+(\.\d+)?)\-(\d+(\.\d+)?)/.test(input.textContent)) {
+        if (/(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent)) {
             result = /(\d+(\.\d+)?)\-(\d+(\.\d+)?)/.exec(input.textContent);
             input.textContent = input.textContent.replace(
                 result[0],
