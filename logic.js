@@ -97,18 +97,18 @@ function getInput(event) {
 } //Getting input from user
 
 function calculate() {
-    let rawResult = input.textContent;
+    let mathPhrase = input.textContent;
     let result = 0;
 
     while (
         /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent) ||
-        /(\d+(\.\d+)?)\-(\d+(\.\d+)?)/.test(input.textContent) ||
+        /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent) ||
         /(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.test(input.textContent) ||
         /(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.test(input.textContent) ||
-        /(\d+(\.\d+)?)\%(\d+(\.\d+)?)/.test(input.textContent)
+        /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)
         ) {
-        if (/(\d+(\.\d+)?)\%(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)\%(\d+(\.\d+)?)/.exec(input.textContent);
+        if (/(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)) {
+            result = /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.exec(input.textContent);
             input.textContent = input.textContent.replace(
                 result[0],
                 parseFloat(result[1]) % parseFloat(result[3])
@@ -139,7 +139,7 @@ function calculate() {
             );
         }
         if (/(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)\-(\d+(\.\d+)?)/.exec(input.textContent);
+            result = /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.exec(input.textContent);
             input.textContent = input.textContent.replace(
                 result[0],
                 parseFloat(result[1]) - parseFloat(result[3])
@@ -147,9 +147,9 @@ function calculate() {
         }
     }
 
-    if (rawResult !== input.textContent) {
+    if (mathPhrase !== input.textContent && !isResult) {
         isResult = true;
-        history.push(rawResult + ' = ' + input.textContent);
+        history.push(mathPhrase + ' = ' + input.textContent);
         historyIndex = history.length - 1;
     }
 } //Calculating the input with equal button
