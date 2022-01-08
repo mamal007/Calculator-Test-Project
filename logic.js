@@ -56,7 +56,7 @@ function getInput(event) {
         input.textContent = "";
     } // Clearing the monitor and refreshing the history index after clicking the History button
     if (
-        (isResult && (/[0-9]/.test(event.target.textContent) ||
+        (isResult && (/\d/.test(event.target.textContent) ||
                 event.target.textContent === "C")
         )) {
         input.textContent = "";
@@ -98,7 +98,7 @@ function getInput(event) {
 
 function calculate() {
     let mathPhrase = input.textContent;
-    let result = 0;
+    let matchedString;
 
     while (
         /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent) ||
@@ -108,44 +108,44 @@ function calculate() {
         /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)
         ) {
         if (/(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.exec(input.textContent);
+            matchedString = /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
             input.textContent = input.textContent.replace(
-                result[0],
-                parseFloat(result[1]) % parseFloat(result[3])
-            );
+                matchedString[0],
+                parseFloat(matchedString[1]) % parseFloat(matchedString[3])
+            ); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.exec(input.textContent);
-            if (result[3] === "0") {
+            matchedString = /(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
+            if (matchedString[3] === "0") {
                 input.textContent = "No dividing by zero!";
             }
             input.textContent = input.textContent.replace(
-                result[0],
-                parseFloat(result[1]) / parseFloat(result[3])
-            );
+                matchedString[0],
+                parseFloat(matchedString[1]) / parseFloat(matchedString[3])
+            ); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.exec(input.textContent);
+            matchedString = /(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
             input.textContent = input.textContent.replace(
-                result[0],
-                parseFloat(result[1]) * parseFloat(result[3])
-            );
+                matchedString[0],
+                parseFloat(matchedString[1]) * parseFloat(matchedString[3])
+            ); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.exec(input.textContent);
+            matchedString = /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
             input.textContent = input.textContent.replace(
-                result[0],
-                parseFloat(result[1]) + parseFloat(result[3])
-            );
+                matchedString[0],
+                parseFloat(matchedString[1]) + parseFloat(matchedString[3])
+            ); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent)) {
-            result = /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.exec(input.textContent);
+            matchedString = /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
             input.textContent = input.textContent.replace(
-                result[0],
-                parseFloat(result[1]) - parseFloat(result[3])
-            );
+                matchedString[0],
+                parseFloat(matchedString[1]) - parseFloat(matchedString[3])
+            ); //Replacing the matched string with the mathematical result
         }
-    }
+    } // Working until no part of the phrase matches with the patterns and there will be just a number as result
 
     if (mathPhrase !== input.textContent && !isResult) {
         isResult = true;
