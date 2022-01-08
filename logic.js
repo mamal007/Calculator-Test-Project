@@ -55,10 +55,7 @@ function getInput(event) {
         historyIndex = history.length - 1;
         input.textContent = "";
     } // Clearing the monitor and refreshing the history index after clicking the History button
-    if (
-        (isResult && (/\d/.test(event.target.textContent) ||
-                event.target.textContent === "C")
-        )) {
+    if ((isResult && (/\d/.test(event.target.textContent) || event.target.textContent === "C"))) {
         input.textContent = "";
         isResult = false;
     } else {
@@ -77,19 +74,11 @@ function getInput(event) {
         input.textContent += event.target.textContent;
     } else if (/\d/.test(event.target.textContent)) {
         input.textContent += event.target.textContent;
-    } else if (
-        input.textContent.length !== 0 &&
-        /\d/.test(input.textContent.charAt(input.textContent.length - 1))
-    ) {
+    } else if (input.textContent.length !== 0 && /\d/.test(input.textContent.charAt(input.textContent.length - 1))) {
         if (event.target.textContent === "x") {
             isFirstPoint = true;
             input.textContent += "*";
-        } else if (
-            event.target.textContent === "/" ||
-            event.target.textContent === "+" ||
-            event.target.textContent === "-" ||
-            event.target.textContent === "%"
-        ) {
+        } else if (event.target.textContent === "/" || event.target.textContent === "+" || event.target.textContent === "-" || event.target.textContent === "%") {
             isFirstPoint = true;
             input.textContent += event.target.textContent;
         }
@@ -100,50 +89,34 @@ function calculate() {
     let mathPhrase = input.textContent;
     let matchedString;
 
-    while (
-        /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent) ||
-        /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent) ||
-        /(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.test(input.textContent) ||
-        /(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.test(input.textContent) ||
-        /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)
-        ) {
+    if (isHistoryClicked) {
+        isHistoryClicked = false;
+        historyIndex = history.length - 1;
+        input.textContent = "";
+    } // Clearing the monitor and refreshing the history index after clicking the History button
+    while (/(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent) || /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent) || /(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.test(input.textContent) || /(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.test(input.textContent) || /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)) {
         if (/(\d+(\.\d+)?)%(\d+(\.\d+)?)/.test(input.textContent)) {
             matchedString = /(\d+(\.\d+)?)%(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
-            input.textContent = input.textContent.replace(
-                matchedString[0],
-                parseFloat(matchedString[1]) % parseFloat(matchedString[3])
-            ); //Replacing the matched string with the mathematical result
+            input.textContent = input.textContent.replace(matchedString[0], parseFloat(matchedString[1]) % parseFloat(matchedString[3])); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.test(input.textContent)) {
             matchedString = /(\d+(\.\d+)?)\/(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
             if (matchedString[3] === "0") {
                 input.textContent = "No dividing by zero!";
             }
-            input.textContent = input.textContent.replace(
-                matchedString[0],
-                parseFloat(matchedString[1]) / parseFloat(matchedString[3])
-            ); //Replacing the matched string with the mathematical result
+            input.textContent = input.textContent.replace(matchedString[0], parseFloat(matchedString[1]) / parseFloat(matchedString[3])); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.test(input.textContent)) {
             matchedString = /(\d+(\.\d+)?)\*(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
-            input.textContent = input.textContent.replace(
-                matchedString[0],
-                parseFloat(matchedString[1]) * parseFloat(matchedString[3])
-            ); //Replacing the matched string with the mathematical result
+            input.textContent = input.textContent.replace(matchedString[0], parseFloat(matchedString[1]) * parseFloat(matchedString[3])); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.test(input.textContent)) {
             matchedString = /(\d+(\.\d+)?)\+(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
-            input.textContent = input.textContent.replace(
-                matchedString[0],
-                parseFloat(matchedString[1]) + parseFloat(matchedString[3])
-            ); //Replacing the matched string with the mathematical result
+            input.textContent = input.textContent.replace(matchedString[0], parseFloat(matchedString[1]) + parseFloat(matchedString[3])); //Replacing the matched string with the mathematical result
         }
         if (/(\d+(\.\d+)?)-(\d+(\.\d+)?)/.test(input.textContent)) {
             matchedString = /(\d+(\.\d+)?)-(\d+(\.\d+)?)/.exec(input.textContent); //Extracting the matched string from the phrase
-            input.textContent = input.textContent.replace(
-                matchedString[0],
-                parseFloat(matchedString[1]) - parseFloat(matchedString[3])
-            ); //Replacing the matched string with the mathematical result
+            input.textContent = input.textContent.replace(matchedString[0], parseFloat(matchedString[1]) - parseFloat(matchedString[3])); //Replacing the matched string with the mathematical result
         }
     } // Working until no part of the phrase matches with the patterns and there will be just a number as result
 
